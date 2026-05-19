@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import BackgroundEffects from './components/BackgroundEffects.vue'
 import ContactSection from './components/ContactSection.vue'
 import DesktopHeader from './components/DesktopHeader.vue'
@@ -13,8 +13,15 @@ import SiteFooter from './components/SiteFooter.vue'
 
 const isMobileNavOpen = ref(false)
 const activeSection = ref('home')
+const theme = ref('light')
+const isDarkMode = computed(() => theme.value === 'dark')
 let observer
 const sectionIds = ['home', 'projects', 'experience', 'gallery', 'contact']
+
+function applyTheme(nextTheme) {
+  document.documentElement.classList.toggle('dark', nextTheme === 'dark')
+  localStorage.setItem('portfolio-theme', nextTheme)
+}
 
 function setActiveFromHash() {
   const hashId = window.location.hash.replace('#', '')
@@ -24,6 +31,11 @@ function setActiveFromHash() {
 }
 
 onMounted(() => {
+  const savedTheme = localStorage.getItem('portfolio-theme')
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  theme.value = savedTheme || (prefersDark ? 'dark' : 'light')
+  applyTheme(theme.value)
+
   setActiveFromHash()
   window.addEventListener('hashchange', setActiveFromHash)
 
@@ -55,15 +67,23 @@ onUnmounted(() => {
   observer?.disconnect()
   window.removeEventListener('hashchange', setActiveFromHash)
 })
+
+watch(theme, applyTheme)
 </script>
 
 <template>
   <BackgroundEffects />
-  <DesktopHeader :active-section="activeSection" />
+  <DesktopHeader
+    :active-section="activeSection"
+    :is-dark-mode="isDarkMode"
+    @toggle-theme="theme = isDarkMode ? 'light' : 'dark'"
+  />
   <MobileNav
     :active-section="activeSection"
+    :is-dark-mode="isDarkMode"
     :is-open="isMobileNavOpen"
     @close="isMobileNavOpen = false"
+    @toggle-theme="theme = isDarkMode ? 'light' : 'dark'"
   />
   <MobileMenuButton :is-open="isMobileNavOpen" @toggle="isMobileNavOpen = !isMobileNavOpen" />
   <HeroSection />

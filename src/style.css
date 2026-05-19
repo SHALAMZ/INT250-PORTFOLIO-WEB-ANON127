@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary-fixed-dim: #00daf3;
   --color-on-background: #191c1e;
@@ -75,6 +77,55 @@ html {
   scroll-behavior: smooth;
 }
 
+html.dark {
+  --color-on-background: #ffffff;
+  --color-surface-container-highest: #3b494c;
+  --color-background: #071113;
+  --color-tertiary-fixed-dim: #6f7a95;
+  --color-on-secondary-fixed: #dfe6ff;
+  --color-on-tertiary-fixed-variant: #c2c9df;
+  --color-tertiary-container: #30384d;
+  --color-on-tertiary-container: #dae2fd;
+  --color-tertiary-fixed: #273044;
+  --color-primary: #71e8f7;
+  --color-on-primary-fixed: #dffaff;
+  --color-error: #ffb4ab;
+  --color-secondary-container: #2543aa;
+  --color-on-error-container: #ffdad6;
+  --color-surface-container-low: #101a1d;
+  --color-tertiary: #c4cce2;
+  --color-on-primary-container: #9cf0ff;
+  --color-on-primary-fixed-variant: #9cf0ff;
+  --color-on-secondary: #061a5f;
+  --color-surface-variant: #344245;
+  --color-secondary-fixed: #263966;
+  --color-error-container: #690005;
+  --color-surface-container: #172124;
+  --color-primary-container: #004f58;
+  --color-surface-bright: #263033;
+  --color-on-error: #690005;
+  --color-secondary-fixed-dim: #8799f2;
+  --color-on-tertiary-fixed: #eaf0ff;
+  --color-inverse-primary: #006875;
+  --color-on-surface-variant: #c4d2d5;
+  --color-primary-fixed: #004f58;
+  --color-on-primary: #00363d;
+  --color-surface: #071113;
+  --color-on-surface: #eff6f8;
+  --color-surface-tint: #71e8f7;
+  --color-inverse-surface: #eff1f3;
+  --color-inverse-on-surface: #2d3133;
+  --color-surface-container-lowest: #04090a;
+  --color-on-secondary-fixed-variant: #bdc9ff;
+  --color-outline: #8b9a9d;
+  --color-outline-variant: #3f4e51;
+  --color-on-tertiary: #273044;
+  --color-secondary: #b7c4ff;
+  --color-surface-dim: #071113;
+  --color-on-secondary-container: #dde1ff;
+  --color-surface-container-high: #222c2f;
+}
+
 body {
   min-height: max(884px, 100dvh);
   overflow-x: hidden;
@@ -87,6 +138,13 @@ body {
   color: var(--color-on-background);
   font-family: var(--font-body);
   animation: subtle-drift 20s ease infinite;
+}
+
+html.dark body {
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(0, 218, 243, 0.12), transparent 45%),
+    radial-gradient(circle at 100% 40%, rgba(119, 146, 255, 0.1), transparent 45%),
+    linear-gradient(180deg, rgba(7, 17, 19, 0.98), rgba(3, 8, 10, 1));
 }
 
 ::selection {
@@ -129,6 +187,12 @@ body {
   background-image:
     linear-gradient(to right, rgba(0, 218, 243, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 218, 243, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-mesh {
+  background-image:
+    linear-gradient(to right, rgba(0, 218, 243, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 218, 243, 0.08) 1px, transparent 1px);
 }
 
 .ambient-blur {
@@ -176,6 +240,10 @@ body {
   pointer-events: none;
 }
 
+.dark .pattern-overlay {
+  background-image: radial-gradient(circle at 10px 10px, rgba(156, 240, 255, 0.06) 2px, transparent 0);
+}
+
 .animation-delay-slow {
   animation-delay: -5s;
 }
@@ -189,11 +257,21 @@ body {
   backdrop-filter: blur(24px);
 }
 
+.dark .floating-card {
+  border-color: rgba(156, 240, 255, 0.22);
+  background: rgba(16, 26, 29, 0.72);
+}
+
 .glass-panel {
   border: 1px solid rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0 4px 30px rgba(0, 218, 243, 0.1);
   backdrop-filter: blur(20px);
+}
+
+.dark .glass-panel {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(7, 17, 19, 0.7);
 }
 
 .neon-glow:hover {
@@ -210,6 +288,13 @@ body {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.dark .project-card {
+  border-color: rgba(156, 240, 255, 0.12);
+  border-top-color: rgba(156, 240, 255, 0.22);
+  border-left-color: rgba(156, 240, 255, 0.18);
+  background: linear-gradient(135deg, rgba(20, 32, 36, 0.78) 0%, rgba(10, 18, 21, 0.45) 100%);
+}
+
 .project-card:hover {
   transform: translateY(-5px);
   border-color: rgba(0, 218, 243, 0.5);
@@ -220,6 +305,10 @@ body {
   border: 1px solid rgba(0, 218, 243, 0.2);
   background: rgba(0, 31, 36, 0.05);
   transition: all 0.2s ease;
+}
+
+.dark .tech-chip {
+  background: rgba(156, 240, 255, 0.06);
 }
 
 .tech-chip:hover {

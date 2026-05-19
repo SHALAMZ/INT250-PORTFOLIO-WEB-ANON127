@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { navLinks, ownerName } from '../data/portfolio'
 
 const props = defineProps({
@@ -7,20 +7,20 @@ const props = defineProps({
     type: String,
     default: 'home',
   },
+  isDarkMode: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const isPlaying = ref(true)
+const emit = defineEmits(['toggleTheme'])
 const desktopLinks = computed(() => navLinks)
 const isActive = (href) => href === `#${props.activeSection}`
-
-function toggleMusic() {
-  isPlaying.value = !isPlaying.value
-}
 </script>
 
 <template>
   <header
-    class="hidden md:flex fixed top-4 left-1/2 z-50 w-[90%] max-w-container-max -translate-x-1/2 items-center justify-between rounded-xl border border-white/30 bg-white/40 px-margin-desktop py-4 shadow-2xl shadow-primary-fixed-dim/10 backdrop-blur-xl"
+    class="hidden md:flex fixed top-4 left-1/2 z-50 w-[90%] max-w-container-max -translate-x-1/2 items-center justify-between rounded-xl border border-white/30 bg-white/40 px-margin-desktop py-4 shadow-2xl shadow-primary-fixed-dim/10 backdrop-blur-xl dark:border-white/10 dark:bg-on-background"
   >
     <a class="flex items-center gap-2" href="#home" aria-label="ZEN_TECH home">
       <span class="material-symbols-outlined text-primary-fixed-dim">terminal</span>
@@ -44,11 +44,11 @@ function toggleMusic() {
     <button
       class="flex items-center justify-center rounded-full p-2 text-on-surface-variant transition-all hover:bg-white/10 hover:text-primary-fixed-dim"
       type="button"
-      :aria-label="isPlaying ? 'Pause lo-fi music' : 'Play lo-fi music'"
-      @click="toggleMusic"
+      :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+      @click="emit('toggleTheme')"
     >
-      <span class="material-symbols-outlined" :class="{ 'text-primary-fixed-dim': isPlaying }">
-        {{ isPlaying ? 'graphic_eq' : 'volume_off' }}
+      <span class="material-symbols-outlined text-primary-fixed-dim">
+        {{ isDarkMode ? 'light_mode' : 'dark_mode' }}
       </span>
     </button>
   </header>

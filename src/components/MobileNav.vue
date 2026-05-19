@@ -10,9 +10,13 @@ defineProps({
     type: String,
     default: 'home',
   },
+  isDarkMode: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'toggleTheme'])
 </script>
 
 <template>
@@ -51,6 +55,20 @@ const emit = defineEmits(['close'])
         <span class="material-symbols-outlined">{{ link.icon }}</span>
         <span>{{ link.label }}</span>
       </a>
+    </div>
+
+    <div class="border-t border-white/10 p-4">
+      <button
+        class="flex w-full items-center justify-between rounded-lg px-4 py-3 font-label text-label-sm text-on-surface-variant transition hover:bg-surface-variant/20 hover:text-primary-fixed-dim"
+        type="button"
+        :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+        @click="emit('toggleTheme')"
+      >
+        <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+        <span class="material-symbols-outlined text-primary-fixed-dim">
+          {{ isDarkMode ? 'light_mode' : 'dark_mode' }}
+        </span>
+      </button>
     </div>
   </nav>
 </template>
