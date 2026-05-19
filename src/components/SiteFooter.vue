@@ -4,7 +4,6 @@ import { ownerName, socialLinks } from '../data/portfolio'
 
 <template>
   <footer
-    id="contact"
     class="mx-auto mt-[120px] flex w-full max-w-container-max flex-col items-center justify-between gap-base border-t border-white/10 bg-transparent px-margin-mobile py-12 transition-all duration-500 md:flex-row md:px-margin-desktop"
   >
     <div class="font-display text-headline-lg-mobile font-bold text-on-background">{{ ownerName }}</div>

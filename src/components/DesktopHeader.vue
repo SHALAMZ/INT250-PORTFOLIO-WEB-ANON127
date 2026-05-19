@@ -2,8 +2,16 @@
 import { computed, ref } from 'vue'
 import { navLinks, ownerName } from '../data/portfolio'
 
+const props = defineProps({
+  activeSection: {
+    type: String,
+    default: 'home',
+  },
+})
+
 const isPlaying = ref(true)
-const desktopLinks = computed(() => navLinks.slice(0, 3))
+const desktopLinks = computed(() => navLinks)
+const isActive = (href) => href === `#${props.activeSection}`
 
 function toggleMusic() {
   isPlaying.value = !isPlaying.value
@@ -26,7 +34,7 @@ function toggleMusic() {
         v-for="(link, index) in desktopLinks"
         :key="link.href"
         class="rounded px-2 pb-1 font-label text-label-sm transition-all hover:bg-white/10 hover:text-primary-fixed-dim hover:shadow-[0_0_15px_rgba(0,218,243,0.3)]"
-        :class="index === 0 ? 'border-b-2 border-primary-fixed-dim text-primary-fixed-dim' : 'text-on-surface-variant'"
+        :class="isActive(link.href) ? 'border-b-2 border-primary-fixed-dim text-primary-fixed-dim' : 'text-on-surface-variant'"
         :href="link.href"
       >
         {{ link.label }}

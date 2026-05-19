@@ -43,7 +43,7 @@ onUnmounted(() => {
 
 <template>
   <main id="home"
-    class="relative flex min-h-screen flex-col items-center justify-center px-margin-mobile pt-32 md:px-margin-desktop md:pt-44 lg:pt-48">
+    class="relative flex min-h-screen flex-col items-center justify-center px-margin-mobile pt-24 md:px-margin-desktop md:pt-28 lg:pt-32">
     <div
       class="relative z-10 mx-auto flex w-full max-w-container-max flex-col items-center justify-between gap-12 lg:flex-row lg:gap-24">
       <section class="order-2 flex w-full flex-1 flex-col items-start gap-6 text-left lg:order-1">
@@ -100,7 +100,7 @@ onUnmounted(() => {
         </div>
       </section>
 
-      <section class="order-1 flex w-full flex-1 items-center justify-center lg:order-2" aria-label="Profile visual">
+      <section class="order-1 flex w-full flex-1 items-center justify-center lg:order-2 lg:-translate-y-12 xl:-translate-y-16" aria-label="Profile visual">
         <div class="relative h-64 w-64 md:h-80 md:w-80 lg:h-[400px] lg:w-[400px]">
           <div
             class="absolute inset-0 animate-[spin_10s_linear_infinite] rounded-full border border-primary-fixed-dim/30 shadow-[0_0_50px_rgba(0,218,243,0.2)]">

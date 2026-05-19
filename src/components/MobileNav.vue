@@ -6,6 +6,10 @@ defineProps({
     type: Boolean,
     required: true,
   },
+  activeSection: {
+    type: String,
+    default: 'home',
+  },
 })
 
 const emit = defineEmits(['close'])
@@ -40,7 +44,7 @@ const emit = defineEmits(['close'])
         v-for="(link, index) in navLinks"
         :key="link.href"
         class="mx-2 flex items-center gap-4 rounded-lg px-4 py-3 font-label text-label-sm transition hover:backdrop-brightness-110"
-        :class="index === 0 ? 'bg-primary-container/30 text-primary-fixed-dim' : 'text-on-surface-variant hover:bg-surface-variant/20'"
+        :class="link.href === `#${activeSection}` ? 'bg-primary-container/30 text-primary-fixed-dim' : 'text-on-surface-variant hover:bg-surface-variant/20'"
         :href="link.href"
         @click="emit('close')"
       >
