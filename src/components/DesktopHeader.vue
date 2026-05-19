@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { navLinks } from '../data/portfolio'
+import { navLinks, ownerName } from '../data/portfolio'
 
 const isPlaying = ref(true)
 const desktopLinks = computed(() => navLinks.slice(0, 3))
@@ -17,7 +17,7 @@ function toggleMusic() {
     <a class="flex items-center gap-2" href="#home" aria-label="ZEN_TECH home">
       <span class="material-symbols-outlined text-primary-fixed-dim">terminal</span>
       <span class="font-display text-[24px] font-extrabold tracking-tight text-primary">
-        ANON YANYING
+        {{ ownerName }}
       </span>
     </a>
 
