@@ -1,0 +1,47 @@
+<script setup>
+import { computed, ref } from 'vue'
+import { navLinks } from '../data/portfolio'
+
+const isPlaying = ref(true)
+const desktopLinks = computed(() => navLinks.slice(0, 3))
+
+function toggleMusic() {
+  isPlaying.value = !isPlaying.value
+}
+</script>
+
+<template>
+  <header
+    class="hidden md:flex fixed top-4 left-1/2 z-50 w-[90%] max-w-container-max -translate-x-1/2 items-center justify-between rounded-xl border border-white/30 bg-white/40 px-margin-desktop py-4 shadow-2xl shadow-primary-fixed-dim/10 backdrop-blur-xl"
+  >
+    <a class="flex items-center gap-2" href="#home" aria-label="ZEN_TECH home">
+      <span class="material-symbols-outlined text-primary-fixed-dim">terminal</span>
+      <span class="font-display text-[24px] font-extrabold tracking-tight text-primary">
+        ANON YANYING
+      </span>
+    </a>
+
+    <nav class="flex gap-8" aria-label="Main navigation">
+      <a
+        v-for="(link, index) in desktopLinks"
+        :key="link.href"
+        class="rounded px-2 pb-1 font-label text-label-sm transition-all hover:bg-white/10 hover:text-primary-fixed-dim hover:shadow-[0_0_15px_rgba(0,218,243,0.3)]"
+        :class="index === 0 ? 'border-b-2 border-primary-fixed-dim text-primary-fixed-dim' : 'text-on-surface-variant'"
+        :href="link.href"
+      >
+        {{ link.label }}
+      </a>
+    </nav>
+
+    <button
+      class="flex items-center justify-center rounded-full p-2 text-on-surface-variant transition-all hover:bg-white/10 hover:text-primary-fixed-dim"
+      type="button"
+      :aria-label="isPlaying ? 'Pause lo-fi music' : 'Play lo-fi music'"
+      @click="toggleMusic"
+    >
+      <span class="material-symbols-outlined" :class="{ 'text-primary-fixed-dim': isPlaying }">
+        {{ isPlaying ? 'graphic_eq' : 'volume_off' }}
+      </span>
+    </button>
+  </header>
+</template>
